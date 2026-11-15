@@ -3,7 +3,7 @@
 Copy these into App Store Connect and Google Play Console. Character limits are noted.
 
 ## Name (30)
-Basel Bürgerquiz
+Swiss Bürgerquiz
 
 ## Apple subtitle (30)
 Einbürgerung Basel üben
@@ -15,7 +15,7 @@ Einbürgerung Basel üben
 
 Bereite dich spielerisch auf das Einbürgerungsgespräch in Basel-Stadt vor.
 
-In Basel gibt es keinen schriftlichen Test. Die Einbürgerungskommission der Bürgergemeinde prüft dein Wissen in einem persönlichen Gespräch. Basel Bürgerquiz trainiert genau die Themen, die dort vorkommen: Bund, Kanton, Stadt, Bräuche, Geschichte und politische Rechte.
+In Basel gibt es keinen schriftlichen Test. Die Einbürgerungskommission der Bürgergemeinde prüft dein Wissen in einem persönlichen Gespräch. Swiss Bürgerquiz trainiert genau die Themen, die dort vorkommen: Bund, Kanton, Stadt, Bräuche, Geschichte und politische Rechte.
 
 SO FUNKTIONIERT ES
 • Vier Tramlinien mit 48 Fragen: Schweiz · Basel-Stadt · Stadt & Bräuche · Geschichte & Rechte
@@ -39,7 +39,7 @@ Dies ist eine inoffizielle, private Lernhilfe. Die App ist nicht mit der Bürger
 
 Practise for the Basel-Stadt naturalisation interview in a fun way.
 
-Basel has no written test: the Bürgergemeinde's naturalisation commission checks your knowledge in a personal interview. Basel Bürgerquiz trains the topics that come up there: federal, cantonal and city politics, customs, history and political rights.
+Basel has no written test: the Bürgergemeinde's naturalisation commission checks your knowledge in a personal interview. Swiss Bürgerquiz trains the topics that come up there: federal, cantonal and city politics, customs, history and political rights.
 
 • Four tram lines with 48 questions, an express round with three lives, and an interview mode where you answer out loud
 • Every question in German with an English translation and explanation

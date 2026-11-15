@@ -22,5 +22,5 @@ jobs:
       - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
         with:
-          name: basel-buergerquiz-debug-apk
+          name: swiss-buergerquiz-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk

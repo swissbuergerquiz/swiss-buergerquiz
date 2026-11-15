@@ -1,4 +1,4 @@
-# Basel Bürgerquiz – iOS & Android app
+# Swiss Bürgerquiz – iOS & Android app
 
 A gamified practice quiz for the Basel-Stadt naturalisation interview, packaged with [Capacitor](https://capacitorjs.com) so the same code ships to the App Store and Google Play.
 
@@ -14,12 +14,12 @@ A gamified practice quiz for the Basel-Stadt naturalisation interview, packaged 
 
 ## Step 0 · Before anything else (15 minutes)
 
-1. **Choose your app ID.** It's set to `com.baselbuergerquiz.app` in `capacitor.config.json`. Change it now if you want something else (for example `ch.yourname.buergerquiz`). **It can never change after the first upload.** If you change it, also change `PRODUCT_BUNDLE_IDENTIFIER` in Xcode and `applicationId` / `namespace` in `android/app/build.gradle`.
-2. **Fill in your contact details** in `docs/privacy.html` (the `[DEIN NAME]` / `[YOUR EMAIL]` placeholders). Both stores require a reachable contact.
+1. **App ID:** `com.swissbuergerquiz.app` (set in `capacitor.config.json`, Xcode and `android/app/build.gradle`). It can never change after the first upload. ✅ Done
+2. **Contact details:** `swissbuergerquiz@gmail.com` is in `docs/privacy.html`. ✅ Done
 3. **Publish the privacy policy** so it has a public URL:
    - Create a GitHub account and a new repository, then upload this whole folder (without `node_modules`).
    - In the repository: **Settings → Pages → Source: Deploy from branch → Branch `main`, folder `/docs`**.
-   - Your URL is `https://<username>.github.io/<repo>/privacy.html`. You'll paste it into both stores.
+   - Your URL is `https://swissbuergerquiz.github.io/swiss-buergerquiz/privacy.html`. You'll paste it into both stores. ✅ Done
 
 ## Step 1 · Test on your own phone
 
@@ -40,7 +40,7 @@ A gamified practice quiz for the Basel-Stadt naturalisation interview, packaged 
    ```
    Android Studio opens. Choose **Build → Generate Signed App Bundle → Android App Bundle**, create a new upload keystore, and build `app-release.aab`.
    **Back up the keystore file and its passwords.** Without them you cannot publish updates.
-4. In Play Console: **Create app** → name *Basel Bürgerquiz*, default language German (Switzerland), App, Free.
+4. In Play Console: **Create app** → name *Swiss Bürgerquiz*, default language German (Switzerland), App, Free.
 5. Complete **App content**: privacy policy URL, Ads = No, App access = no login needed, Content rating questionnaire, Target audience 18+, Data safety = no data collected (see `STORE-LISTING.md`), Government apps = **No**. Because the app covers government topics, Google requires the non-affiliation disclaimer and source links in the description; they're already in the listing text.
 6. **Store listing:** texts from `STORE-LISTING.md`, the icon from `assets/icon-only.png` (resize to 512 px), a 1024×500 feature graphic and at least 2 phone screenshots.
 7. **Testing → Closed testing:** upload the `.aab`, add your 12+ testers, wait 14 days, then **Apply for production**. Review usually takes a few days.
@@ -55,7 +55,7 @@ A gamified practice quiz for the Basel-Stadt naturalisation interview, packaged 
    npm run ios
    ```
    Xcode opens. Select the **App** target → **Signing & Capabilities** → tick *Automatically manage signing* and choose your team.
-4. In **App Store Connect** (appstoreconnect.apple.com): **My Apps → + → New App**, platform iOS, name *Basel Bürgerquiz*, primary language German, bundle ID = your app ID, SKU anything (e.g. `basel-quiz-1`).
+4. In **App Store Connect** (appstoreconnect.apple.com): **My Apps → + → New App**, platform iOS, name *Swiss Bürgerquiz*, primary language German, bundle ID = your app ID, SKU anything (e.g. `basel-quiz-1`).
 5. In Xcode: choose **Any iOS Device**, then **Product → Archive → Distribute App → App Store Connect → Upload**.
 6. In App Store Connect fill in:
    - texts, keywords and review notes from `STORE-LISTING.md`

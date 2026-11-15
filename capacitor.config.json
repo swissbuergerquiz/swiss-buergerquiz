@@ -1,6 +1,6 @@
 {
-  "appId": "com.baselbuergerquiz.app",
-  "appName": "Basel Bürgerquiz",
+  "appId": "com.swissbuergerquiz.app",
+  "appName": "Swiss Bürgerquiz",
   "webDir": "www",
   "plugins": {
     "SplashScreen": {

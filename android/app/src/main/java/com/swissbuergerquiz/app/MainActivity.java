@@ -1,4 +1,4 @@
-package com.baselbuergerquiz.app;
+package com.swissbuergerquiz.app;
 
 import com.getcapacitor.BridgeActivity;
 

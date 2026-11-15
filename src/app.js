@@ -311,7 +311,7 @@ async function scheduleReminder(){
     }
     const [hour,minute]=S.reminder.time.split(":").map(Number);
     await LocalNotifications.schedule({notifications:[{
-      id:REM_ID,title:"Basel Bürgerquiz",
+      id:REM_ID,title:"Swiss Bürgerquiz",
       body:REM_LINES[Math.floor(Math.random()*REM_LINES.length)],
       schedule:{on:{hour,minute},allowWhileIdle:true}
     }]});

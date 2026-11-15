@@ -143,7 +143,7 @@ async function scheduleReminder(){
     }
     const [hour,minute]=S.reminder.time.split(":").map(Number);
     await LocalNotifications.schedule({notifications:[{
-      id:REM_ID,title:"Basel Bürgerquiz",
+      id:REM_ID,title:"Swiss Bürgerquiz",
       body:REM_LINES[Math.floor(Math.random()*REM_LINES.length)],
       schedule:{on:{hour,minute},allowWhileIdle:true}
     }]});
@@ -176,7 +176,7 @@ import { StatusBar, Style } from "@capacitor/status-bar";
 """
 open(f"{out}/app.js", "w", encoding="utf-8").write(imports + script)
 
-title = '<title>Basel Bürgerquiz</title>'
+title = '<title>Swiss Bürgerquiz</title>'
 body = body.replace(title, "").replace('<meta name="claude:viewport-fit-sides" content="cover">', "")
 body = re.sub(r'<link rel="preconnect"[^>]*>\s*', "", body)
 body = re.sub(r'<link rel="stylesheet" href="https://fonts.googleapis.com[^>]*>\s*', "", body)
