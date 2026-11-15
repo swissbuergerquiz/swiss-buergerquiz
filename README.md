@@ -1,6 +1,6 @@
 # Swiss Bürgerquiz – iOS & Android app
 
-A gamified practice quiz for the Basel-Stadt naturalisation interview, packaged with [Capacitor](https://capacitorjs.com) so the same code ships to the App Store and Google Play.
+A gamified practice quiz for the Swiss naturalisation test and interview, covering all 26 cantons in German, French and Italian (with English help), packaged with [Capacitor](https://capacitorjs.com) so the same code ships to the App Store and Google Play.
 
 **Already done in this project**
 - iOS and Android projects (`ios/`, `android/`) with app icon, splash screens (light and dark) and notification icon
@@ -40,7 +40,7 @@ A gamified practice quiz for the Basel-Stadt naturalisation interview, packaged 
    ```
    Android Studio opens. Choose **Build → Generate Signed App Bundle → Android App Bundle**, create a new upload keystore, and build `app-release.aab`.
    **Back up the keystore file and its passwords.** Without them you cannot publish updates.
-4. In Play Console: **Create app** → name *Swiss Bürgerquiz*, default language German (Switzerland), App, Free.
+4. In Play Console: **Create app** → name *Swiss Bürgerquiz*, default language German (Switzerland), App, Free. Later, under **Store presence → Main store listing → Manage translations**, add French and Italian.
 5. Complete **App content**: privacy policy URL, Ads = No, App access = no login needed, Content rating questionnaire, Target audience 18+, Data safety = no data collected (see `STORE-LISTING.md`), Government apps = **No**. Because the app covers government topics, Google requires the non-affiliation disclaimer and source links in the description; they're already in the listing text.
 6. **Store listing:** texts from `STORE-LISTING.md`, the icon from `assets/icon-only.png` (resize to 512 px), a 1024×500 feature graphic and at least 2 phone screenshots.
 7. **Testing → Closed testing:** upload the `.aab`, add your 12+ testers, wait 14 days, then **Apply for production**. Review usually takes a few days.
@@ -55,7 +55,7 @@ A gamified practice quiz for the Basel-Stadt naturalisation interview, packaged 
    npm run ios
    ```
    Xcode opens. Select the **App** target → **Signing & Capabilities** → tick *Automatically manage signing* and choose your team.
-4. In **App Store Connect** (appstoreconnect.apple.com): **My Apps → + → New App**, platform iOS, name *Swiss Bürgerquiz*, primary language German, bundle ID = your app ID, SKU anything (e.g. `basel-quiz-1`).
+4. In **App Store Connect** (appstoreconnect.apple.com): **My Apps → + → New App**, platform iOS, name *Swiss Bürgerquiz*, primary language German, bundle ID = your app ID, SKU anything (e.g. `swiss-quiz-1`). Add French and Italian as extra languages under **App Information → Localizations**.
 5. In Xcode: choose **Any iOS Device**, then **Product → Archive → Distribute App → App Store Connect → Upload**.
 6. In App Store Connect fill in:
    - texts, keywords and review notes from `STORE-LISTING.md`
@@ -63,13 +63,25 @@ A gamified practice quiz for the Basel-Stadt naturalisation interview, packaged 
    - privacy policy URL, App Privacy = *Data Not Collected*, age rating, price Free
 7. Select the uploaded build, then **Add for Review → Submit**. Reviews usually take 1–3 days.
 
-**Avoiding rejection.** Apple sometimes rejects apps that look like a website in a wrapper (guideline 4.2). This app has offline play, native storage, haptics and local notifications, which helps. If Apple still asks for more native value, reply in Resolution Center describing those features. Never claim to be official: the in-app disclaimer and listing text already handle this, and don't use the Basel coat of arms or the Swiss cross as the icon.
+**Avoiding rejection.** Apple sometimes rejects apps that look like a website in a wrapper (guideline 4.2). This app has offline play, native storage, haptics and local notifications, which helps. If Apple still asks for more native value, reply in Resolution Center describing those features. Never claim to be official: the in-app disclaimer and listing text already handle this, and don't use a cantonal coat of arms or the Swiss cross as the icon; Swiss law protects them.
 
 ## Step 4 · Updating questions
 
-All questions live in `src/app.js` in the `Q` list. The first answer is always the correct one; the app shuffles them.
+Questions are in three files in `src/data/`. In every question the first answer is the correct one; the app shuffles them.
 
-1. Edit `src/app.js`. Questions marked `cur:1` are time-sensitive (Federal Council, Regierungsrat, Ständerat). **Check them every December** after the Federal Assembly elections, and after Basel elections.
+| File | Contents |
+|---|---|
+| `federal.js` | 59 federal questions (politics, country & society, history) in DE/FR/IT/EN |
+| `cantons.js` | `CANTONS`: the facts table for all 26 cantons (capital, government, parliament, seats…). The app turns each row into 8 questions in every language. `CUSTOM`: 2–3 hand-written questions per canton. |
+| `i18n.js` | All interface texts and the sentence templates for the generated canton questions |
+
+**What to check, and when**
+- **Every December:** the Federal Assembly elects the Federal Council. The app avoids naming office holders, so nothing breaks, but you could add questions about the new Federal President.
+- **Before the 2027 National Council elections:** the seats per canton (`nr` in `cantons.js`) are recalculated from the population. Update them when the Federal Council publishes the new distribution.
+- **When a canton changes its government or parliament size** (rare): update `gov` or `parl`.
+
+**Publishing an update**
+1. Edit the files, then run `node scripts/check-questions.mjs` to catch missing translations or duplicate answers.
 2. Raise the version:
    - Android: `versionCode` (+1) and `versionName` in `android/app/build.gradle`
    - iOS: *Version* and *Build* in Xcode → App target → General
@@ -79,7 +91,9 @@ All questions live in `src/app.js` in the `Q` list. The first answer is always t
 
 | Path | What it is |
 |---|---|
-| `src/index.html`, `src/app.js` | The quiz: screens, styles, questions, game logic |
+| `src/index.html`, `src/app.js` | Screens, styles and game logic |
+| `src/questions.js` | Builds the question set for the chosen language and canton |
+| `src/data/` | Questions, canton facts and translations |
 | `src/fonts/` | Bundled fonts (SIL Open Font License) |
 | `scripts/build.mjs` | Bundles `src/` into `www/` (run by `npm run build`) |
 | `assets/` | Source icon and splash images. After changing them, run `npm run assets` |

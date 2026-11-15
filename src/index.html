@@ -182,82 +182,112 @@ details.about summary::after{content:"+";font-family:var(--f-mono);color:var(--m
 details.about[open] summary::after{content:"–"}
 details.about h3{font-size:16px;margin-top:14px}
 details.about p{font-size:14px;color:var(--muted);margin:6px 0 0;-webkit-user-select:text;user-select:text}
+
+/* Swiss-wide: onboarding, pickers */
+.onb{display:flex;flex-direction:column;gap:18px}
+.onb h2{font-size:30px;font-weight:800}
+.onb p{margin:0;color:var(--muted)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:2px solid var(--rule);background:var(--card);border-radius:99px;padding:8px 16px;font-weight:600;box-shadow:0 3px 0 var(--rule)}
+.chip[aria-pressed="true"]{border-color:var(--tram);background:var(--good-bg);box-shadow:0 3px 0 var(--tram)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.cbtn{display:flex;align-items:center;gap:10px;text-align:left;border:2px solid var(--rule);background:var(--card);border-radius:12px;padding:8px 10px;min-width:0}
+.cbtn b{flex:none;width:34px;height:26px;border-radius:6px;background:var(--sunk);display:grid;place-items:center;font-family:var(--f-mono);font-size:12px}
+.cbtn span{font-size:14px;line-height:1.2;min-width:0;overflow-wrap:anywhere}
+.cbtn[aria-pressed="true"]{border-color:var(--tram);background:var(--good-bg)}
+.cbtn[aria-pressed="true"] b{background:var(--tram);color:var(--tram-ink)}
+select{font:inherit;font-size:15px;color:var(--ink);background:var(--sunk);border:2px solid var(--rule);border-radius:10px;padding:6px 8px;max-width:58%}
+.sub-en{color:var(--muted);font-size:14px;font-style:italic}
+.fb .sub-en{margin-top:4px}
+.ctag{font-family:var(--f-mono);font-size:12px;background:var(--sunk);border-radius:6px;padding:2px 6px;margin-left:6px;color:var(--muted)}
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
 <div class="wrap">
 
+<!-- ONBOARDING -->
+<section id="onb" class="onb" hidden>
+  <div class="brand"><div class="brand-mark">S</div><div><h1>Swiss Bürgerquiz</h1><div class="eyebrow" id="oSub"></div></div></div>
+  <h2 id="oTitle"></h2>
+  <p id="oText"></p>
+  <div class="eyebrow" id="oLangT"></div>
+  <div class="chips" id="oLangs"></div>
+  <div class="eyebrow" id="oCantonT"></div>
+  <div class="cgrid" id="oCantons"></div>
+  <button class="btn" id="oStart" disabled></button>
+</section>
+
 <!-- HOME -->
-<section id="home" class="wrap" style="gap:20px">
+<section id="home" class="wrap" style="gap:20px" hidden>
   <div class="top">
-    <div class="brand"><div class="brand-mark">S</div><div><h1>Swiss Bürgerquiz</h1><div class="eyebrow">Einbürgerungsgespräch · Basel-Stadt</div></div></div>
-    <button class="iconbtn" id="mute" aria-label="Ton an oder aus"></button>
+    <div class="brand"><div class="brand-mark">S</div><div><h1>Swiss Bürgerquiz</h1><div class="eyebrow" id="hSub"></div></div></div>
+    <button class="iconbtn" id="mute"></button>
   </div>
 
   <div class="level">
-    <div class="level-row"><span class="eyebrow">Dein Rang</span><span class="daystreak" id="dayStreak"></span><span class="mono" id="xpTotal"></span></div>
+    <div class="level-row"><span class="eyebrow" id="tRank"></span><span class="daystreak" id="dayStreak"></span><span class="mono" id="xpTotal"></span></div>
     <div class="level-name" id="lvlName"></div>
     <div class="bar"><i id="lvlBar"></i></div>
     <div class="note" id="lvlNext"></div>
   </div>
 
-  <div class="eyebrow">Wähle eine Linie</div>
+  <div class="eyebrow" id="tChoose"></div>
   <div class="lines" id="lines"></div>
 
   <div class="modes">
-    <button class="mode" id="mMix"><span class="ic" style="color:var(--gold)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span><b>Express: alle Themen</b><span>15 gemischte Fragen, 3 Leben</span></span></button>
-    <button class="mode" id="mCards"><span class="ic" style="color:var(--l3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span><b>Interview-Training</b><span>Frage lesen, laut auf Deutsch antworten, dann prüfen</span></span></button>
-    <button class="mode" id="mWrong"><span class="ic" style="color:var(--signal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></span><span><b>Fehler wiederholen</b><span id="wrongCount"></span></span></button>
+    <button class="mode" id="mMix"><span class="ic" style="color:var(--gold)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span><b id="tMix"></b><span id="tMixS"></span></span></button>
+    <button class="mode" id="mCards"><span class="ic" style="color:var(--l3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span><b id="tCards"></b><span id="tCardsS"></span></span></button>
+    <button class="mode" id="mWrong"><span class="ic" style="color:var(--signal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></span><span><b id="tWrong"></b><span id="wrongCount"></span></span></button>
   </div>
 
-  <div class="eyebrow">Abzeichen</div>
+  <div class="eyebrow" id="tBadges"></div>
   <div class="badges" id="badges"></div>
 
-
-  <div class="settings" id="settings" hidden>
+  <div class="eyebrow" id="tSettings"></div>
+  <div class="settings">
+    <div class="setrow"><b id="sLangT"></b><select id="sLang"></select></div>
+    <div class="setrow"><b id="sCantonT"></b><select id="sCanton"></select></div>
     <div class="setrow">
-      <div><b>Tägliche Erinnerung</b><span id="remNote">Ein kurzer Hinweis, damit deine Tagesserie hält</span></div>
-      <button class="switch" id="remToggle" role="switch" aria-checked="false" aria-label="Tägliche Erinnerung"></button>
+      <div><b id="sEnT"></b><span id="sEnP"></span></div>
+      <button class="switch" id="sEn" role="switch" aria-checked="true"></button>
+    </div>
+    <div class="setrow" id="remRow" hidden>
+      <div><b id="remT"></b><span id="remNote"></span></div>
+      <button class="switch" id="remToggle" role="switch" aria-checked="false"></button>
     </div>
     <div class="setrow" id="remTimeRow" hidden>
-      <span>Uhrzeit</span>
+      <span id="remTimeT"></span>
       <input type="time" id="remTime" value="19:00">
     </div>
   </div>
 
   <details class="about">
-    <summary>Über die App &amp; Datenschutz</summary>
-    <h3>Inoffizielle Lernhilfe</h3>
-    <p>Diese App ist ein privates Lernangebot. Sie ist nicht mit der Bürgergemeinde der Stadt Basel, dem Kanton Basel-Stadt oder einer anderen Behörde verbunden und ersetzt keine offizielle Auskunft.</p>
-    <h3>Quellen</h3>
-    <p>Die Themen folgen den öffentlich beschriebenen Inhalten des Kompaktkurses Einbürgerung der Bürgergemeinde (bgbasel.ch), den Informationen des Kantons (bs.ch) und der Bundesbehörden (admin.ch). Verbindliche Informationen erhältst du bei der Bürgergemeinde der Stadt Basel, Tel. 061 269 96 10.</p>
-    <h3>Datenschutz</h3>
-    <p>Die App sammelt keine persönlichen Daten, hat kein Konto, keine Werbung und kein Tracking. Dein Lernfortschritt wird nur auf diesem Gerät gespeichert. Erinnerungen werden lokal auf dem Gerät geplant. Wenn du die App löschst, ist auch dein Fortschritt gelöscht.</p>
+    <summary id="aboutS"></summary>
+    <div id="aboutB"></div>
   </details>
 
-  <p class="note">Fragen zu Personen (Bundesrat, Regierungsrat, Parlament) entsprechen dem Stand November 2026. Im Dezember wählt die Bundesversammlung neue Bundesratsmitglieder und das Präsidium für 2027. Prüfe diese Antworten kurz vor deinem Gespräch. Im echten Gespräch wird auch nach aktuellen Abstimmungen gefragt.</p>
+  <p class="note" id="hNote"></p>
 </section>
 
 <!-- PLAY -->
 <section id="play" class="wrap" hidden>
   <div class="hud">
-    <button class="iconbtn" id="quit" aria-label="Zur Übersicht"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <button class="iconbtn" id="quit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
     <div class="hearts" id="hearts"></div>
     <span class="combo" id="combo">×1</span>
     <span class="xp" id="xpRound">0 XP</span>
   </div>
   <div class="track" id="track"></div>
-  <div class="stopname"><span class="eyebrow">Nächster Halt</span><b id="stopName"></b><span class="note mono" id="qPos"></span></div>
+  <div class="stopname"><span class="eyebrow" id="tNext"></span><b id="stopName"></b><span class="note mono" id="qPos"></span></div>
   <div class="qcard">
     <div class="eyebrow" id="qTopic"></div>
     <h2 id="qText"></h2>
     <div class="en" id="qEn"></div>
-    <div class="cur" id="qCur" hidden><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Aktuell, vor dem Gespräch prüfen</div>
     <div class="opts" id="opts"></div>
   </div>
-  <div class="fb" id="fb" hidden><h3 id="fbH"></h3><p id="fbX"></p></div>
-  <button class="btn" id="next" hidden>Weiter</button>
+  <div class="fb" id="fb" hidden><h3 id="fbH"></h3><p id="fbX"></p><p class="sub-en" id="fbEn"></p></div>
+  <button class="btn" id="next" hidden></button>
 </section>
 
 <!-- RESULT -->
@@ -268,31 +298,31 @@ details.about p{font-size:14px;color:var(--muted);margin:6px 0 0;-webkit-user-se
     <h2 id="rTitle"></h2>
     <p class="note" id="rSub" style="margin:0"></p>
     <div class="stats">
-      <div class="stat"><b id="rScore"></b><small>richtig</small></div>
-      <div class="stat"><b id="rXp"></b><small>XP verdient</small></div>
-      <div class="stat"><b id="rCombo"></b><small>beste Serie</small></div>
+      <div class="stat"><b id="rScore"></b><small id="rS1"></small></div>
+      <div class="stat"><b id="rXp"></b><small id="rS2"></small></div>
+      <div class="stat"><b id="rCombo"></b><small id="rS3"></small></div>
     </div>
     <div class="newb" id="rBadges"></div>
   </div>
-  <div class="row"><button class="btn" id="again">Nochmal fahren</button><button class="btn ghost" id="home2">Zur Übersicht</button></div>
+  <div class="row"><button class="btn" id="again"></button><button class="btn ghost" id="home2"></button></div>
 </section>
 
 <!-- CARDS -->
 <section id="cards" class="wrap" hidden>
   <div class="hud">
-    <button class="iconbtn" id="quit2" aria-label="Zur Übersicht"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    <span class="eyebrow">Interview-Training</span>
+    <button class="iconbtn" id="quit2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <span class="eyebrow" id="cTitle"></span>
     <span class="mono note" id="cCount"></span>
   </div>
   <div class="flash">
     <div class="eyebrow" id="cTopic"></div>
     <h2 id="cText" style="font-size:24px;font-weight:800"></h2>
     <div class="en" id="cEn" style="color:var(--muted);font-size:14px"></div>
-    <div class="say"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Antworte laut in ganzen Sätzen, wie im Gespräch mit der Kommission.</div>
-    <div class="ans" id="cAns" hidden><span class="eyebrow">Antwort</span><b id="cA"></b><p class="note" id="cX" style="margin:0"></p></div>
+    <div class="say"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span id="cSay"></span></div>
+    <div class="ans" id="cAns" hidden><span class="eyebrow" id="cAnsT"></span><b id="cA"></b><p class="note" id="cX" style="margin:0"></p><p class="sub-en" id="cXen" style="margin:0"></p></div>
   </div>
-  <button class="btn" id="reveal">Antwort zeigen</button>
-  <div class="row" id="grade" hidden><button class="btn bad" id="gNo">Nochmal üben</button><button class="btn" id="gYes">Gewusst</button></div>
+  <button class="btn" id="reveal"></button>
+  <div class="row" id="grade" hidden><button class="btn bad" id="gNo"></button><button class="btn" id="gYes"></button></div>
 </section>
 </div>
 <script src="app.bundle.js"></script>
