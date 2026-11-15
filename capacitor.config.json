@@ -1,0 +1,17 @@
+{
+  "appId": "com.baselbuergerquiz.app",
+  "appName": "Basel Bürgerquiz",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false,
+      "launchShowDuration": 0,
+      "backgroundColor": "#0e7a45",
+      "showSpinner": false
+    },
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_notify",
+      "iconColor": "#0e7a45"
+    }
+  }
+}
