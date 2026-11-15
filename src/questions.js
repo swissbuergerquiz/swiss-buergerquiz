@@ -1,5 +1,7 @@
 // Builds the question pool for one language and canton: federal + generated canton facts + hand-written canton questions.
-import { FED } from "./data/federal.js";
+import { FED as FED1 } from "./data/federal.js";
+import FED2 from "./data/federal-extra.js";
+const FED = [...FED1, ...FED2];
 import { CANTONS, CUSTOM } from "./data/cantons.js";
 import TXT from "./data/i18n.js";
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
