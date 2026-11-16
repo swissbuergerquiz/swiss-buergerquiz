@@ -136,7 +136,7 @@ export default [
  it:["Quanti membri ha l'esecutivo di un comune ginevrino con meno di 50 000 abitanti?","3","5","7","1","Solo i comuni con più di 50 000 abitanti hanno un esecutivo di cinque membri; è eletto ogni 5 anni con il maggioritario."],
  en:["How many members does the executive of a Geneva commune with under 50,000 inhabitants have?","3","5","7","1","Only communes with over 50,000 inhabitants have a five-member executive; it is elected every 5 years by majority vote."]},
 {id:"ge28",k:"GE",src:"https://www.ge.ch/document/25243/annexe/file/553372",
- de:["Wie viele Mitglieder hat der Conseil administratif (Exekutive) der Stadt Genf?","5","3","7","9","Die Stadt Genf hat als einzige Genfer Gemeinde über 50'000 Einwohner und deshalb eine fünfköpfige Exekutive."],
+ de:["Wie viele Mitglieder hat der Conseil administratif (Exekutive) der Stadt Genf?","5","3","7","9","Als Gemeinde mit über 50'000 Einwohnern hat die Stadt Genf eine fünfköpfige, vom Volk gewählte Exekutive."],
  fr:["Combien de membres compte le Conseil administratif (exécutif) de la Ville de Genève ?","5","3","7","9","Commune de plus de 50 000 habitants, la Ville de Genève a un exécutif de cinq membres élus par le peuple."],
  it:["Quanti membri ha il Conseil administratif (esecutivo) della Città di Ginevra?","5","3","7","9","Comune con più di 50 000 abitanti, la Città di Ginevra ha un esecutivo di cinque membri eletti dal popolo."],
  en:["How many members does the Conseil administratif (executive) of the City of Geneva have?","5","3","7","9","As a commune of over 50,000 inhabitants, the City of Geneva has a five-member executive elected by the people."]},
